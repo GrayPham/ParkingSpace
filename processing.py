@@ -10,4 +10,4 @@ def extract_first_frame(video_path, image_name):
         print("Failed to extract the first frame.")
 
 # Example usage
-extract_first_frame("data//Khare_testvideo_03.mp4", "image_base_Khare_testvideo_03")
+extract_first_frame("data//parking1.mp4", "image_base_parking1")

@@ -1,9 +1,10 @@
 import pickle
-
+import joblib
 from skimage.transform import resize
 import numpy as np
 import cv2
 MODEL = pickle.load(open("models/model.p", "rb"))
+MODEL_SVM = joblib.load('svm_model2.pkl')
 EMPTY = True
 NOT_EMPTY = False
 
@@ -18,6 +19,18 @@ def empty_or_not(spot_bgr):
     y_output = MODEL.predict(flat_data)
 
     if y_output == 0:
+        return EMPTY
+    else:
+        return NOT_EMPTY
+def empty_or_not_SVM(spot_bgr):
+
+    flat_data = []
+    img_resized =  cv2.resize(spot_bgr, (15, 15))
+    img_resized = img_resized.reshape(1, -1)
+
+    y_output = MODEL_SVM.predict(img_resized)
+    print(y_output[0])
+    if y_output[0] == 0:
         return EMPTY
     else:
         return NOT_EMPTY
